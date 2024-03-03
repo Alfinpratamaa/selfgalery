@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import { redirect } from "next/navigation";
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 export const POST = async (req: Request): Promise<void | Response> => {
   try {
