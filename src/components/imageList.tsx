@@ -43,7 +43,7 @@ const ImageList = ({ url }: ImageListProps) => {
                     <div className="fixed bottom-6 right-6">
                         {/* Your flying button content goes here */}
                         <Link href='/upload'>
-                            <Button size="icon" color="primary" className='rounded-full text-lg'>
+                            <Button size="lg" color="primary" className='rounded-full text-lg'>
                                 +
                             </Button>
                         </Link>
