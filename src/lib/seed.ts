@@ -8,7 +8,7 @@ async function main() {
     update: { isEmailVerified: true },
     create: {
       email: "admin@admin.com",
-      name: "Muhamad Alfin Pratama",
+      name: "Muhasmad Alfin Pratama",
       password,
     },
   });
