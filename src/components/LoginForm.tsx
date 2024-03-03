@@ -130,43 +130,7 @@ const LoginForm = () => {
                             Register here
                         </Link>
                     </p>
-                    <p className="mt-2 text-center text-sm text-gray-500">
-                        Or Login with{' '}
-                        <Button
-                            className='px-7 py-2 text-slate-900 mt-2 font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center'
-                            onClick={() => signIn('github')}
-                            role='button'
-                            variant={'outline'}
-                        >
-                            <Image
-                                className='pr-2'
-                                src='/img-src/github.svg'
-                                alt=''
-                                width={40}
-                                height={40}
-                            />
-                            Continue with GitHub
-                        </Button>
-                        <Button
-                            className='px-7 py-2 mt-4 text-primary-foreground font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3'
-                            onClick={() => signIn('google', { callbackUrl: '/profile' })}
-                            role='button'
-                            color="primary"
 
-
-                        >
-                            <Image
-                                className='pr-2'
-                                src='/img-src/google.svg'
-                                alt=''
-                                style={{ height: '2rem' }}
-                                width={35}
-                                height={35}
-                            />
-                            Continue with Google
-                        </Button>
-
-                    </p>
                 </div>
             </div>
         </>
