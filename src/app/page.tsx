@@ -13,8 +13,8 @@ import ImageList from "@/components/imageList";
 
 export default async function Home() {
 
-  // const { blobs } = await list()
-  // console.log({ blobs })
+  const { blobs } = await list()
+  console.log({ blobs })
 
   const session = await getServerSession(authOptions)
 
@@ -41,7 +41,7 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* {blobs.length == 0 && (
+          {blobs.length == 0 && (
             <div className="mx-auto mt-2 p-20 ">
               <div>
                 <h1 className="text-center">No image found</h1>
@@ -60,7 +60,7 @@ export default async function Home() {
                   <ImageList url={blob.url} />
                 </div>
             ))}</div>
-          </div> */}
+          </div>
 
           {/* <div className="mt-0">
             <Gallery userDir={String(session?.user?.email!)} />
