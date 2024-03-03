@@ -25,10 +25,10 @@ const RegisterForm = () => {
         try {
             const res = await axios.post("/api/register", values);
             console.log(res);
-            toast.success('Account created successfully')
+            toast.success('Account created successfully', { style: { backgroundColor: 'lightgreen' }, icon: '🚀', position: "top-center" })
             router.push("/login");
         } catch (error: any) {
-            toast.error(error.message);
+            toast.error(error.message, { style: { backgroundColor: 'red', color: 'white' }, position: "top-center" });
             console.error(error.message);
         } finally {
             setIsLoading(false);

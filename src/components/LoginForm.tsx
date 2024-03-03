@@ -44,13 +44,13 @@ const LoginForm = () => {
                 return null
             }
 
-            toast.success('Login success')
+            toast.success('Login success', { style: { backgroundColor: 'lightgreen' }, icon: '🚀', position: 'top-center' },)
             router.push('/')
 
         } catch (error: any) {
 
             setIsLoading(false)
-            toast.error(error.message)
+            toast.error(error.message, { style: { backgroundColor: 'red', color: 'white' }, position: 'top-center' })
             console.error(error)
         } finally {
             setIsLoading(false)

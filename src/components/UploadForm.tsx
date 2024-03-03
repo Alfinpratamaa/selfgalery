@@ -53,11 +53,11 @@ export default function UploadForm() {
 
             setBlob(newBlob);
 
-            toast.success('successfuly upload an image', { style: { backgroundColor: 'lightgreen', }, icon: '🚀' })
+            toast.success('successfuly upload an image', { style: { backgroundColor: 'lightgreen', }, icon: '🚀', position: "top-center" })
             setIsLoading(false)
             router.push('/')
         } catch (error) {
-            toast.error('failed uploading an image', { style: { backgroundColor: 'red' } })
+            toast.error('failed uploading an image', { style: { backgroundColor: 'red', color: 'white' }, position: "top-center" })
             setIsLoading(false)
         }
 
