@@ -1,20 +1,23 @@
+'use client'
 import { Button } from '@/components/ui/button';
 import { signOut } from 'next-auth/react';
-import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 const UserStillLoggedIn = () => {
+    const router = useRouter()
 
-    const session = getServerSession(authOptions)
+    const { data: session } = useSession()
 
     if (!session) {
-        redirect('/login')
+        router.push('/login')
     }
 
     const handleLogout = async () => {
-        await signOut()
-        redirect('/login')
+        await signOut({
+            redirect: false,
+            callbackUrl: '/'
+        })
     }
 
     return (
@@ -26,9 +29,11 @@ const UserStillLoggedIn = () => {
                     Logout
                 </Button>
                 <p>or back to home</p>
-                <Button size={'sm'} color='green' onClick={() => redirect('/')}>
+                <Link href='/'>
+                    <Button size={'sm'} color='green' >
                     Home
                 </Button>
+                </Link>
             </div>
         </div>
     );
