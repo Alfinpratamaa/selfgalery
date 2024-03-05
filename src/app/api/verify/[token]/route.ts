@@ -9,7 +9,9 @@ export const GET = async (
   const session = await getServerSession(authOptions);
 
   if (session) {
-    return NextResponse.redirect("/still-loggedin");
+    return NextResponse.redirect(
+      "https://selfgalery.vercel.app/still-loggedin"
+    );
   }
 
   const { token } = params;
