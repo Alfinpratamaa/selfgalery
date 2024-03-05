@@ -24,9 +24,11 @@ const UserStillLoggedIn = () => {
                 </Button>
                 <p className='mt-2 mb-2'>or back to home</p>
                 <Link href='/'>
-                    <Button size={'default'} variant='secondary'  >
+                    <div className='mx-auto justify-center'>
+                        <Button size={'default'} variant='ghost'  >
                         Home
                     </Button>
+                    </div>
                 </Link>
             </div>
         </div>
