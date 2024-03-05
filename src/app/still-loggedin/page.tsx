@@ -1,43 +1,17 @@
-'use client'
-import { Button } from '@/components/ui/button';
-import { signOut } from 'next-auth/react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import UserStillLoggedIn from './StillLogedIn'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { redirect } from 'next/navigation'
 
-const UserStillLoggedIn = () => {
-    const router = useRouter()
 
-    const { data: session, status } = useSession()
 
-    if (!session) {
-        router.push('/login')
-    }
-
-    const handleLogout = async () => {
-        await signOut({
-            redirect: false,
-            callbackUrl: '/'
-        })
-    }
+export default async function page() {
+    const session = await getServerSession(authOptions)
+    !session ? redirect('/login') : null
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-            <h1 className="text-3xl font-bold mb-4">You haven't logged out before.</h1>
-            <p className="text-lg text-gray-600 mb-8">Please logout first.</p>
-            <div className='flex flex-col justify-center mx-auto'>
-                <Button size={'sm'} color='primary' onClick={handleLogout}>
-                    Logout
-                </Button>
-                <p>or back to home</p>
-                <Link href='/'>
-                    <Button size={'sm'} color='green' >
-                    Home
-                </Button>
-                </Link>
-            </div>
-        </div>
-    );
-};
-
-export default UserStillLoggedIn;
+       <div>
+           <UserStillLoggedIn />
+       </div>
+   );
+}

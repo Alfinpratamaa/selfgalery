@@ -7,7 +7,6 @@ import Skeleton from 'react-loading-skeleton';
 import { FiMenu } from 'react-icons/fi'
 import { FiX } from 'react-icons/fi';
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-// ... (previous imports)
 
 export default function Navbar() {
     const [animationParent] = useAutoAnimate()
