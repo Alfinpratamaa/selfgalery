@@ -7,9 +7,11 @@ const UserStillLoggedIn = () => {
 
     const handleLogout = async () => {
         await signOut({
-            redirect: false,
-            callbackUrl: '/'
+            redirect: true,
+            callbackUrl: '/',
         })
+
+
     }
 
     return (
