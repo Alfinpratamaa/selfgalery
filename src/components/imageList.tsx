@@ -1,18 +1,17 @@
-'use client'
+'use client';
+
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { AiOutlineDelete } from 'react-icons/ai';
-
-// Interface for ImageListProps
 interface ImageListProps {
     url: string;
 }
 
-// ImageList component
 const ImageList = ({ url }: ImageListProps) => {
     const [isMobile, setIsMobile] = useState<boolean>(false);
-    const [showOptions, setShowOptions] = useState<boolean>(false);
+    const [isHovered, setIsHovered] = useState<boolean>(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -28,8 +27,12 @@ const ImageList = ({ url }: ImageListProps) => {
         }
     }, []);
 
-    const handleToggleOptions = () => {
-        setShowOptions(!showOptions);
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
     };
 
     return (
@@ -38,25 +41,17 @@ const ImageList = ({ url }: ImageListProps) => {
                 <div>
                     <Link key={url} href={url} target="_blank">
                         <div
-                            className={`relative group ${isMobile ? 'cursor-pointer' : 'hover:shadow-md'}`}
-                            onClick={isMobile ? handleToggleOptions : undefined}
+                            className="relative group"
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
                         >
                             <img
                                 src={url}
-                                className={`h-auto max-w-full rounded-lg object-cover object-center ${isMobile ? 'filter brightness-75' : ''
-                                    }`}
+                                className="h-auto max-w-full rounded-lg object-cover object-center"
                             />
-                            {isMobile && showOptions && (
+                            {isHovered && (
                                 <div className="absolute top-0 right-0 p-2">
-                                    <Button
-                                        size="sm"
-                                        color="danger"
-                                        className="rounded-full"
-                                        onClick={() => {
-                                            // Handle delete action here
-                                            console.log('Delete action');
-                                        }}
-                                    >
+                                    <Button size="sm" color="danger" className="rounded-full">
                                         <AiOutlineDelete size={20} />
                                     </Button>
                                 </div>
@@ -68,14 +63,11 @@ const ImageList = ({ url }: ImageListProps) => {
                 {isMobile && (
                     <div className="fixed bottom-6 right-6">
                         {/* Your flying button content goes here */}
-                        <Button
-                            size="lg"
-                            color="primary"
-                            className="rounded-full text-lg"
-                            onClick={handleToggleOptions}
-                        >
-                            &#8226;&#8226;&#8226; {/* Use the horizontal ellipsis character */}
-                        </Button>
+                        <Link href="/upload">
+                            <Button size="lg" color="primary" className="rounded-full text-lg">
+                                +
+                            </Button>
+                        </Link>
                     </div>
                 )}
             </section>
