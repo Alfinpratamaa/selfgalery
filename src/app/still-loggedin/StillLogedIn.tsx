@@ -20,9 +20,9 @@ const UserStillLoggedIn = () => {
                 <Button size={'sm'} color='primary' onClick={handleLogout}>
                     Logout
                 </Button>
-                <p>or back to home</p>
+                <p className='mt-2 mb-2'>or back to home</p>
                 <Link href='/'>
-                    <Button size={'sm'} color='green' >
+                    <Button size={'sm'} color='success' >
                         Home
                     </Button>
                 </Link>
