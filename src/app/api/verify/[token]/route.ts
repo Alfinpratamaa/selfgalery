@@ -6,11 +6,11 @@ export const GET = async (
   req: Request,
   { params }: { params: { token: string } }
 ) => {
-  // const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
-  // if (!session) {
-  //   return NextResponse.redirect(`${process.env.DOMAIN_URL}/`);
-  // }
+  if (session) {
+    return NextResponse.redirect("/still-loggedin");
+  }
 
   const { token } = params;
 
