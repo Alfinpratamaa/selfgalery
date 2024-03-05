@@ -7,64 +7,71 @@ export const GET = async (
   { params }: { params: { token: string } }
 ) => {
   const session = await getServerSession(authOptions);
+  try {
+    if (session) {
+      return NextResponse.redirect(
+        "https://selfgalery.vercel.app/still-loggedin"
+      );
+    }
 
-  if (session) {
-    return NextResponse.redirect(
-      "https://selfgalery.vercel.app/still-loggedin"
-    );
-  }
+    const { token } = params;
 
-  const { token } = params;
-
-  const user = await prisma.user.findFirst({
-    where: {
-      verifiyAccount: {
-        some: {
-          AND: [
-            {
-              activatedAt: null,
-            },
-            {
-              createdAt: {
-                gt: new Date(Date.now() - 24 * 60 * 60 * 1000),
+    const user = await prisma.user.findFirst({
+      where: {
+        verifiyAccount: {
+          some: {
+            AND: [
+              {
+                activatedAt: null,
               },
-            },
-            {
-              token,
-            },
-          ],
+              {
+                createdAt: {
+                  gt: new Date(Date.now() - 24 * 60 * 60 * 1000),
+                },
+              },
+              {
+                token,
+              },
+            ],
+          },
         },
       },
-    },
-  });
+    });
 
-  if (!user) {
-    return NextResponse.json(
-      {
-        status: "error",
-        message: "Invalid or expired token",
+    if (!user) {
+      return NextResponse.json(
+        {
+          status: "error",
+          message: "Invalid or expired token",
+        },
+        { status: 404 }
+      );
+    }
+
+    await prisma.user.update({
+      where: {
+        id: user.id,
       },
-      { status: 404 }
+      data: {
+        isEmailVerified: true,
+      },
+    });
+
+    await prisma.verifyAccount.update({
+      where: {
+        token,
+      },
+      data: {
+        activatedAt: new Date(),
+      },
+    });
+
+    return NextResponse.redirect(`${process.env.DOMAIN_URL}/activated`);
+  } catch (error: any) {
+    return NextResponse.json(
+      { status: "error", message: error.message },
+      { status: 500 }
     );
   }
-
-  await prisma.user.update({
-    where: {
-      id: user.id,
-    },
-    data: {
-      isEmailVerified: true,
-    },
-  });
-
-  await prisma.verifyAccount.update({
-    where: {
-      token,
-    },
-    data: {
-      activatedAt: new Date(),
-    },
-  });
-
-  return NextResponse.redirect(`${process.env.DOMAIN_URL}/activated`);
+  
 };
