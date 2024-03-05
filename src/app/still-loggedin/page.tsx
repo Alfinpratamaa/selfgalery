@@ -4,10 +4,11 @@ import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+
 const UserStillLoggedIn = () => {
     const router = useRouter()
 
-    const { data: session } = useSession()
+    const { data: session, status } = useSession()
 
     if (!session) {
         router.push('/login')
