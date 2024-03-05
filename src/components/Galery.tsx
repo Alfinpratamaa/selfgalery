@@ -16,7 +16,6 @@ type Props = {
 
 export default function Gallery({ userDir }: Props) {
     const [files, setFiles] = useState<Array<string>>([]);
-    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     const [blob, setBlob] = useState<PutBlobResult | null>(null)
 
@@ -33,6 +32,7 @@ export default function Gallery({ userDir }: Props) {
         fetchImages();
     }, []);
 
+    const [isMobile, setIsMobile] = useState<boolean>(false);
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const handleResize = () => {
