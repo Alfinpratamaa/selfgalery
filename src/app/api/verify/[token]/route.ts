@@ -7,13 +7,12 @@ export const GET = async (
   { params }: { params: { token: string } }
 ) => {
   const session = await getServerSession(authOptions);
+  if (session) {
+    return NextResponse.redirect(
+      "https://selfgalery.vercel.app/still-loggedin"
+    );
+  }
   try {
-    if (session) {
-      return NextResponse.redirect(
-        "https://selfgalery.vercel.app/still-loggedin"
-      );
-    }
-
     const { token } = params;
 
     const user = await prisma.user.findFirst({
