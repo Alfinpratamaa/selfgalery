@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { list } from '@vercel/blob'
 import ImageList from "@/components/imageList";
+import Loading from "./loading";
 
 
 export default async function Home() {
@@ -23,7 +24,7 @@ export default async function Home() {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <main className="">
 
           <Navbar />
